@@ -29,3 +29,10 @@ class AmazonTextualInfoExtraction():
 
         path = Path()
         self.product_textual_info_write_path = path.cwd() / self.dump_info_path / 'product_textual_info.json'
+
+    def dl_page(self):
+        driver = webdriver.Firefox()
+        driver.get(self.URL)
+        self.page_source = driver.page_source
+        self.soup_obj = BeautifulSoup(self.page_source,"lxml")
+        driver.close()
