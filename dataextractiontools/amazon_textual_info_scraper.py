@@ -165,7 +165,7 @@ class AmazonTextualInfoExtraction():
         
         Parameters
         ----------
-        path : str
+        path : os.PathLike
             the path of a json file in which our extracted tables are written
         """
 
@@ -180,7 +180,7 @@ class AmazonTextualInfoExtraction():
         ----------
         info_dict : dict
             tabular data extracted from the Amazon product web page in a dictionary format
-        path : str
+        path : os.PathLike
             the path of a json file in which our extracted tables are written
         """
 
