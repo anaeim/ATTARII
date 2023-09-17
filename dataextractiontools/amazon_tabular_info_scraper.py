@@ -93,19 +93,6 @@ class AmazonTabularInfoExtraction():
         self.soup_obj = BeautifulSoup(self.page_source,"lxml")
         driver.close()
 
-
-    # def extract_title(self):
-    #     try:
-    #         self.dl_page()
-    #         title_string = self.soup_obj.select('div#title_feature_div')[0].getText().strip()
-    #         title_string = remove_unicode_chars(title_string)
-
-    #     except:
-    #         title_string = "NOT FOUND"	
-
-    #     return title_string
-
-
     def get_product_overview_table(self):
         """extracts the product overview tables from the Amazon product web page
         """
@@ -129,7 +116,6 @@ class AmazonTabularInfoExtraction():
 
         self.product_overview_table_dict = _product_overview_table
 
-
     def get_product_detail_table_all_types(self):
         """extracts all types of product detail tables from the Amazon product web page
         """
@@ -151,7 +137,6 @@ class AmazonTabularInfoExtraction():
             _product_detail_table = {'NA':'NA'}
 
         self.product_detail_table_dict = _product_detail_table
-
 
     def get_product_detail_table_type1(self):
         """extracts type1 of product detail tables from the Amazon product web page
@@ -190,7 +175,6 @@ class AmazonTabularInfoExtraction():
             _product_detail_table['Best Sellers Rank'] = Best_Sellers_Rank
 
         return _product_detail_table
-
 
     def get_product_details_table_type2(self):
         """extracts type2 of product detail tables from the Amazon product web page
@@ -234,7 +218,6 @@ class AmazonTabularInfoExtraction():
 
         return _product_detail_table
 
-
     def get_product_detail_table_type3(self):
         """extracts type3 of product detail tables from the Amazon product web page
 
@@ -259,7 +242,6 @@ class AmazonTabularInfoExtraction():
 
         return _product_detail_table
 
-
     @staticmethod
     def print_dict_indented(dict_):
         """prints a dictionary in an indented format
@@ -271,7 +253,6 @@ class AmazonTabularInfoExtraction():
         """
 
         print(json.dumps(dict_, indent=4))
-
 
     @staticmethod
     def create_empty_info_dict(path):
@@ -287,7 +268,6 @@ class AmazonTabularInfoExtraction():
         with path.open('w') as fh:
             json.dump(dict_temp, fh, indent=4)
 
-
     def dump_info_dict_to_json(self, info_dict, path):
         """dumps the extracted info_dict into an already generated json file
 
@@ -302,7 +282,6 @@ class AmazonTabularInfoExtraction():
         print(f'dumped in {path}.')
         with path.open('r+') as fh:
             json.dump(info_dict, fh, indent=4)
-
 
     def extract(self, URL):
         """extract tabular information from a Amazon product webpage using the URL of the page
