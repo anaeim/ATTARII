@@ -66,3 +66,36 @@ class AmazonTextualInfoExtraction():
             _list = ['']
 
         self.product_textual_info_dict['bullet_points'] = _list
+
+    def extract_product_description(self):
+        """extracts the product description from the Amazon product web page
+        """
+
+        try:
+            # variant 1
+            descriptions = self.soup_obj.select('#productDescription p')
+            _product_descriptions_list = []
+            for description in descriptions:
+                description = description.get_text().strip()
+                _product_descriptions_list.append(description)
+                _product_descriptions = ' '.join(_product_descriptions_list)
+
+            # variant 2
+            if len(_product_descriptions_list) == 0:
+                descriptions = self.soup_obj.select('#productDescription_feature_div p')
+                _product_descriptions_list = []
+                for description in descriptions:
+                    description = description.get_text().strip()
+
+                    _product_descriptions_list.append(description)
+                    _product_descriptions = ' '.join(_product_descriptions_list)
+
+            if len(_product_descriptions_list) == 0:
+                    _product_descriptions = ""
+
+        except:
+            _product_descriptions = ""
+
+        _product_descriptions = utils.remove_unicode_chars(_product_descriptions)
+
+        self.product_textual_info_dict['product_description'] = _product_descriptions
