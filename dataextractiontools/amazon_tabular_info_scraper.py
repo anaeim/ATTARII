@@ -4,9 +4,9 @@ import json
 import sys
 from selenium import webdriver
 
-from dataextractiontools.utils import remove_unicode_chars
+from utils import remove_unicode_chars
 
-class AmazonTabularContentScraper():
+class AmazonTabularInfoExtraction():
     """A class used to download Amazon e-commerce product web pages using the URL and extract the tabular data included in the Amazon web page
 
     ...
