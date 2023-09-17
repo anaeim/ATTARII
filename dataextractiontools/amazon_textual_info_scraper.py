@@ -46,3 +46,23 @@ class AmazonTextualInfoExtraction():
             _title = ''
 
         self.product_textual_info_dict['title'] = _title
+
+    def extract_bullet_points(self):
+        try:
+            _list = []  # save each bullet point as an item of _list
+            for item in self.soup_obj.select('#feature-bullets li'):
+                item = item.select('.a-list-item')[0].get_text().strip()
+
+                # to remove template instructions, e.g. "Make sure this fits by entering your model number.", from the extracted bullet points.
+                if item == "Make sure this fits by entering your model number.":
+                    continue
+
+                # to remove remove_unicode_chars
+                item = utils.remove_unicode_chars(item)
+
+                _list.append(item)
+
+        except:
+            _list = ['']
+
+        self.product_textual_info_dict['bullet_points'] = _list
