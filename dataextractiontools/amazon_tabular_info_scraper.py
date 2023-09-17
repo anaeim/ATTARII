@@ -1,10 +1,13 @@
-from bs4 import BeautifulSoup
 import re
 import json
 import sys
+from pathlib import Path
+
+from bs4 import BeautifulSoup
 from selenium import webdriver
 
-from utils import remove_unicode_chars
+from dataextractiontools.utils import remove_unicode_chars
+
 
 class AmazonTabularInfoExtraction():
     """A class used to download Amazon e-commerce product web pages using the URL and extract the tabular data included in the Amazon web page
@@ -66,6 +69,9 @@ class AmazonTabularInfoExtraction():
         self.product_detail_table_dict = dict()
         self.product_overview_table_dict = dict()
 
+        path = Path()
+        self.product_detail_table_write_path = path.cwd() / self.dump_info_path / 'product_detail_table.json'
+        self.product_overview_table_write_path = path.cwd() / self.dump_info_path / 'product_overview_table.json'
 
     def get_url(self, URL):
         self.URL = URL
