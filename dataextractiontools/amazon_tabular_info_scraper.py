@@ -53,7 +53,7 @@ class AmazonTabularInfoExtraction():
         call the instance like a function and calls the class methods in the defined order
     """
 
-    def __init__(self, URL):
+    def __init__(self, args):
         """
         Parameters
         ----------
@@ -295,26 +295,35 @@ class AmazonTabularInfoExtraction():
             json.dump(info_dict, fh, indent=4)
 
 
-    def __call__(self):
+    def extract(self, URL):
         """call the instance like a function and calls the class methods in the defined order
+
+        Parameters
+        ----------
+        URL : str
+            the URL of a Amazon product web page
         """
+
+        self.URL = URL
         self.dl_page()
-        print('product_detail_table:')
+
         self.get_product_detail_table_all_types()
-        self.print_dict_indented(self.product_detail_table_dict)
-        self.create_empty_info_dict(self.product_detail_table_write_path)
-        self.dump_info_dict_to_json(self.product_detail_table_dict, self.product_detail_table_write_path)
 
-        print('\n\n\nproduct_overview_table:')
+        if self.verbosity_enabled:
+            print('product_detail_table:')
+            self.print_dict_indented(self.product_detail_table_dict)
+
+        if self.dump_info_enabled:
+            self.create_empty_info_dict(self.product_detail_table_write_path)
+            self.dump_info_dict_to_json(self.product_detail_table_dict, self.product_detail_table_write_path)
+
         self.get_product_overview_table()
-        self.print_dict_indented(self.product_overview_table_dict)
-        self.create_empty_info_dict(self.product_overview_table_write_path)
-        self.dump_info_dict_to_json(self.product_overview_table_dict, self.product_overview_table_write_path)
 
+        if self.verbosity_enabled:
+            print('\n','*'*20)
+            print('product_overview_table:')
+            self.print_dict_indented(self.product_overview_table_dict)
 
-
-URL = "https://www.amazon.com/New-Apple-Watch-GPS-40mm/dp/B08KHR6B3W/ref=sr_1_2?keywords=apple+watch&qid=1668543539&sr=8-2"
-amazon_scrapor = AmazonTabularContentScraper(URL=URL)
-amazon_scrapor()
-# print(amazon_scrapor.product_detail_table_dict)
-# print(amazon_scrapor.product_overview_table_dict)
+        if self.dump_info_enabled:
+            self.create_empty_info_dict(self.product_overview_table_write_path)
+            self.dump_info_dict_to_json(self.product_overview_table_dict, self.product_overview_table_write_path)
