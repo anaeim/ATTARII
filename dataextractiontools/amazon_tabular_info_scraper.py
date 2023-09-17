@@ -65,6 +65,7 @@ class AmazonTabularInfoExtraction():
         self.dump_info_enabled = args.dump_info_enabled
         self.dump_info_path = args.dump_info_path
 
+        self.URL = None
         self.soup_obj = None
         self.product_detail_table_dict = dict()
         self.product_overview_table_dict = dict()
@@ -72,9 +73,6 @@ class AmazonTabularInfoExtraction():
         path = Path()
         self.product_detail_table_write_path = path.cwd() / self.dump_info_path / 'product_detail_table.json'
         self.product_overview_table_write_path = path.cwd() / self.dump_info_path / 'product_overview_table.json'
-
-    def get_url(self, URL):
-        self.URL = URL
 
     def dl_page(self):
         """downloads the product web pages and create a BeautifulSoup object
@@ -277,7 +275,7 @@ class AmazonTabularInfoExtraction():
         """
 
         dict_temp = dict()
-        with open(path, 'w') as fh:
+        with path.open('w') as fh:
             json.dump(dict_temp, fh, indent=4)
 
 
