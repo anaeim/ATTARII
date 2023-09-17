@@ -140,3 +140,19 @@ class AmazonTextualInfoExtraction():
         print(f'dumped in {path}.')
         with path.open('r+') as fh:
             json.dump(info_dict, fh, indent=4)
+
+    def extract(self, URL):
+        self.URL = URL
+        self.dl_page()
+
+        self.extract_title()
+        self.extract_bullet_points()
+        self.extract_product_description()
+
+        if self.verbosity_enabled:
+            print('product_detail_table:')
+            self.print_dict_indented(self.product_textual_info_dict)
+
+        if self.dump_info_enabled:
+            self.create_empty_info_dict(self.product_textual_info_write_path)
+            self.dump_info_dict_to_json(self.product_textual_info_dict, self.product_textual_info_write_path)
