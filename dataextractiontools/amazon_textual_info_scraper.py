@@ -11,6 +11,44 @@ from dataextractiontools import utils
 
 
 class AmazonTextualInfoExtraction():
+    """A class used to download Amazon e-commerce product web pages using the URL and extract the tabular data included in the Amazon web page
+
+    ...
+
+    Attributes
+    ----------
+    URL : str
+        the URL of the product web page
+    args : namedtuple
+        the arguments pre-defined by the user and imported from config.py
+    verbosity_enabled : bool
+        display the extracted tabular info
+    dump_info_enabled : bool
+        dump the extracted info as a json file
+    dump_info_path : str
+        the directory to dump the extracted info
+    soup_obj : BeautifulSoup
+        an instance of BeautifulSoup using the page_content
+    product_textual_info_dict : dict
+        a dictionary containing the product textual information extracted from the Amazon product web page
+    product_textual_info_write_path : os.PathLike
+        the path of json file in which the product_textual_info_dict is written
+
+
+    Methods
+    -------
+    dl_page()
+        downloads the product web pages and create a BeautifulSoup object
+    extract_title()
+        extracts the product title from the Amazon product web page
+    extract_bullet_points()
+        extracts the bullet points from the Amazon product web page
+    extract_product_description()
+        extracts the product description from the Amazon product web page
+    extract(URL)
+        extracts the textual information from a Amazon product webpage using the URL of the page
+    """
+
     def __init__(self, args):
         """
         Parameters
@@ -31,6 +69,9 @@ class AmazonTextualInfoExtraction():
         self.product_textual_info_write_path = path.cwd() / self.dump_info_path / 'product_textual_info.json'
 
     def dl_page(self):
+        """downloads the product web pages and create a BeautifulSoup object
+        """
+
         driver = webdriver.Firefox()
         driver.get(self.URL)
         self.page_source = driver.page_source
@@ -38,6 +79,9 @@ class AmazonTextualInfoExtraction():
         driver.close()
 
     def extract_title(self):
+        """extracts the product title from the Amazon product web page
+        """
+
         try:
             _title = self.soup_obj.select('div#title_feature_div')[0].getText().strip()
             _title = utils.remove_unicode_chars(_title)
@@ -48,6 +92,9 @@ class AmazonTextualInfoExtraction():
         self.product_textual_info_dict['title'] = _title
 
     def extract_bullet_points(self):
+        """extracts the bullet points from the Amazon product web page
+        """
+
         try:
             _list = []  # save each bullet point as an item of _list
             for item in self.soup_obj.select('#feature-bullets li'):
@@ -142,6 +189,14 @@ class AmazonTextualInfoExtraction():
             json.dump(info_dict, fh, indent=4)
 
     def extract(self, URL):
+        """extracts the textual information from a Amazon product webpage using the URL of the page
+
+        Parameters
+        ----------
+        URL : str
+            the URL of a Amazon product web page
+        """
+
         self.URL = URL
         self.dl_page()
 
