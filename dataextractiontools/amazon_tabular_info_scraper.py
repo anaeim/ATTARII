@@ -291,7 +291,7 @@ class AmazonTabularInfoExtraction():
         """
 
         print(f'dumped in {path}.')
-        with open(path, 'r+') as fh:
+        with path.open('r+') as fh:
             json.dump(info_dict, fh, indent=4)
 
 
