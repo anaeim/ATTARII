@@ -1,4 +1,5 @@
 import re
+import os
 import json
 import sys
 from pathlib import Path
@@ -18,15 +19,23 @@ class AmazonTabularInfoExtraction():
     ----------
     URL : str
         the url of the product web page
+    args : namedtuple
+        the arguments pre-defined by the user and imported from config.py
+    verbosity_enabled : bool
+        display the extracted tabular info
+    dump_info_enabled : bool
+        dump the extracted info as a json file
+    dump_info_path : str
+        the directory to dump the extracted info
     soup_obj : BeautifulSoup
         An instance of BeautifulSoup using the page_content
     product_detail_table_dict : dict
         A dictionary containing the product detail tables extracted from the Amazon product web page
     product_overview_table_dict : dict
         A dictionary containing the product overview tables extracted from the Amazon product web page
-    product_detail_table_write_path : str
+    product_detail_table_write_path : os.PathLike
         the path of json file in which the product detail tables are written (default ./extracted_info/product_detail_table.json)
-    product_overview_table_write_path : str
+    product_overview_table_write_path : os.PathLike
         the path of json file in which the product overview tables are written (default ./extracted_info/product_overview_table.json)
 
     Methods
@@ -49,8 +58,8 @@ class AmazonTabularInfoExtraction():
         creates a empty json file in which our extracted tables are written in dictionary format
     dump_info_dict_to_json(self, info_dict, path)
         dumps the extracted info_dict into an already generated json file
-    __call__()
-        call the instance like a function and calls the class methods in the defined order
+    extract(URL)
+        extract tabular information from a Amazon product webpage using the URL of the page
     """
 
     def __init__(self, args):
@@ -296,7 +305,7 @@ class AmazonTabularInfoExtraction():
 
 
     def extract(self, URL):
-        """call the instance like a function and calls the class methods in the defined order
+        """extract tabular information from a Amazon product webpage using the URL of the page
 
         Parameters
         ----------
