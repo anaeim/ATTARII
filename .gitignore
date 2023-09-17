@@ -152,6 +152,6 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-extracted_contents/
+extracted_info/
 test*.py
 test*.ipynb
