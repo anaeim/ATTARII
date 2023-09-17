@@ -36,3 +36,13 @@ class AmazonTextualInfoExtraction():
         self.page_source = driver.page_source
         self.soup_obj = BeautifulSoup(self.page_source,"lxml")
         driver.close()
+
+    def extract_title(self):
+        try:
+            _title = self.soup_obj.select('div#title_feature_div')[0].getText().strip()
+            _title = utils.remove_unicode_chars(_title)
+
+        except:
+            _title = ''
+
+        self.product_textual_info_dict['title'] = _title
