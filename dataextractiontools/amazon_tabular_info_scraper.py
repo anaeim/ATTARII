@@ -54,16 +54,18 @@ class AmazonTabularInfoExtraction():
         """
         Parameters
         ----------
-        URL : str
-            the url of the product web page
+        args : namedtuple
+            the namespace variable that contains the config for the scraper
         """
-        self.URL = URL
+
+        self.verbosity_enabled = args.verbosity_enabled
+        self.dump_info_enabled = args.dump_info_enabled
+        self.dump_info_path = args.dump_info_path
+
         self.soup_obj = None
-        # self.title = ""
         self.product_detail_table_dict = dict()
         self.product_overview_table_dict = dict()
-        self.product_detail_table_write_path = './extracted_info/product_detail_table.json'
-        self.product_overview_table_write_path = './extracted_info/product_overview_table.json'
+
 
     def get_url(self, URL):
         self.URL = URL
