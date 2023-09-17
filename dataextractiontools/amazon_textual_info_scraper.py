@@ -99,3 +99,44 @@ class AmazonTextualInfoExtraction():
         _product_descriptions = utils.remove_unicode_chars(_product_descriptions)
 
         self.product_textual_info_dict['product_description'] = _product_descriptions
+
+    @staticmethod
+    def print_dict_indented(dict_):
+        """prints a dictionary in an indented format
+
+        Parameters
+        ----------
+        dict_ : dict
+            a dictionary of tabular data extracted from the Amazon product web page
+        """
+
+        print(json.dumps(dict_, indent=4))
+
+    @staticmethod
+    def create_empty_info_dict(path):
+        """creates a empty json file in which our extracted tables are written in dictionary format
+        
+        Parameters
+        ----------
+        path : str
+            the path of a json file in which our extracted tables are written
+        """
+
+        dict_temp = dict()
+        with path.open('w') as fh:
+            json.dump(dict_temp, fh, indent=4)
+
+    def dump_info_dict_to_json(self, info_dict, path):
+        """dumps the extracted info_dict into an already generated json file
+
+        Parameters
+        ----------
+        info_dict : dict
+            tabular data extracted from the Amazon product web page in a dictionary format
+        path : str
+            the path of a json file in which our extracted tables are written
+        """
+
+        print(f'dumped in {path}.')
+        with path.open('r+') as fh:
+            json.dump(info_dict, fh, indent=4)
