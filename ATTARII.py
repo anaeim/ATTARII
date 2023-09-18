@@ -3,6 +3,12 @@ from dataextractiontools import amazon_tabular_info_scraper, amazon_textual_info
 
 
 def main():
+    """
+    Main function for scraping textual and tabular information from an Amazon product page.
+    This function parses command-line arguments, determines the type of information to extract (tabular or textual),
+    and initiates the appropriate scraping process based on the provided URL and arguments.
+    """
+
     args = parse_args()
 
     if args.info_type == "tabular":
