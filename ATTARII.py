@@ -9,6 +9,9 @@ def main():
         tabular_info_extraction = amazon_tabular_info_scraper.AmazonTabularInfoExtraction(args)
         tabular_info_extraction.extract(args.URL)
 
+    if args.info_type == "textual":
+        textual_info_extraction = amazon_textual_info_scraper.AmazonTextualInfoExtraction(args)
+        textual_info_extraction.extract(args.URL)
 
 
 if __name__ == "__main__":
