@@ -1,12 +1,27 @@
 # Amazon Textual and TAbulaR Information extractIon (ATTARII)
 
 # Intro
-Amazon e-commerce products contain rich sources of information spread over text and tables. **A**mazon **T**extual and **TA**bula**R** **I**nformation extract**I**on (**ATTARII**) can effectively scrape Amazon product web pages and extract textual information (e.g., product titles, bullet points, and product descriptions) and tabular information (e.g., product detail tables and product overview tables). These sections are marked in the figure below:
+Amazon e-commerce products contain rich sources of information spread over text and tables. **A**mazon **T**extual and **TA**bula**R** **I**nformation extract**I**on (**ATTARII**) can effectively scrape Amazon product web pages and extract sections of interest. These sections on Amazon web pages are divided into two categories:
+- Textual information
+  - Product titles
+  - Bullet points
+  - Product descriptions
+- Tabular information
+  - Product detail tables
+  - Product overview tables
+  
+These sections are marked in the figure below:
+
+<img
+  src="images/page_sections.jpg"
+  alt="Alt text"
+  title="Optional title"
+  style="display: inline-block; margin: 0 auto; max-width: 700px">
 
 
 Given the URL of an Amazon product web page, ATTARII retrieves the web page content by the [webdriver](https://www.geeksforgeeks.org/page_source-driver-method-selenium-python/) of [Selenium library](https://pypi.org/project/selenium/). In the next step, ATTARII parses the HTML content with [Beautiful Soup](https://pypi.org/project/beautifulsoup4/) library, and it extracts the desired sections using HTML tags and ids. There is [an excellent tutorial](https://realpython.com/beautiful-soup-web-scraper-python/#step-2-scrape-html-content-from-a-page) for Beautiful Soup library.
 
-Different suppliers and developers may use different HTML tags and ids to include the product data. The tools that I have developed here are capable of extracting the desired sections for the majority of Amazon products, when I test the tools for [Amazon-PQA dataset](https://registry.opendata.aws/amazon-pqa/).
+Different suppliers and developers may use different HTML tags and ids to include the product data. The tool that I have developed here is capable of extracting the desired sections for the majority of Amazon products, when I test the tools for [Amazon-PQA dataset](https://registry.opendata.aws/amazon-pqa/).
 
 
 # Installation
@@ -48,3 +63,13 @@ The meaning of the flags:
 * ``--verbosity-enabled``: to display the extracted information.
 * ``--dump-info-enabled``: to dump and store the extracted information as a ``.JSON`` file.
 * ``--dump-info-path``: to specify the directory to dump and store the extracted information.
+
+
+# Example
+Here is an example of extracted tabular info for the [Apple Watch Series 6 on Amazon](https://www.amazon.com/dp/B08KHR6B3W/):
+
+<img
+  src="images/terminal_output.png"
+  alt="Alt text"
+  title="Optional title"
+  style="display: inline-block; margin: 0 auto; max-width: 700px">
