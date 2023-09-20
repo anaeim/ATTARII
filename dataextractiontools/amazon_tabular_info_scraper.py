@@ -97,7 +97,7 @@ class AmazonTabularInfoExtraction():
         """extracts the product overview tables from the Amazon product web page
         """
 
-        try:	
+        try:
             _product_overview_table = {}
             my_keys = []
             my_values = []
